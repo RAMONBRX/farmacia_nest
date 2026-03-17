@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CategoriaController } from './categoria/controllers/categoria.controller';
 import { CategoriaModule } from './categoria/categoria.module';
 import { ProdutoModule } from './produto/produto.module';
+import { AuthModule } from './auth/auth.module';
+import { UsuarioModule } from './usuario/usuario.module';
 
 
 @Module({
@@ -18,7 +19,9 @@ import { ProdutoModule } from './produto/produto.module';
       synchronize: true
     }),
     CategoriaModule,
-    ProdutoModule
+    ProdutoModule,
+    AuthModule,
+    UsuarioModule
   ],
   controllers: [],
   providers: [],

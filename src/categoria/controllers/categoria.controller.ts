@@ -1,7 +1,9 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put, UseGuards } from "@nestjs/common";
 import { Categoria } from "../entities/categoria.entity";
 import { CategoriaService } from "../services/categoria.service";
+import { JwtAuthGuard } from "../../auth/guard/jwt-auth.guard";
 
+@UseGuards(JwtAuthGuard)
 @Controller("/categorias")
 export class CategoriaController {
   constructor(private readonly categoriaService: CategoriaService) { }
@@ -18,10 +20,10 @@ export class CategoriaController {
     return this.categoriaService.findById(id);
   }
 
-  @Get('/tipo/:tipo')
+  @Get('/nome/:nome')
   @HttpCode(HttpStatus.OK)
-  findByTitulo(@Param('tipo') tipo: string): Promise<Categoria[]> {
-    return this.categoriaService.findByNome(tipo);
+  findByNome(@Param('nome') nome: string): Promise<Categoria[]> {
+    return this.categoriaService.findByNome(nome);
   }
 
   @Post()
