@@ -1,5 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { CategoriaController } from './categoria/controllers/categoria.controller';
+import { CategoriaModule } from './categoria/categoria.module';
 
 
 @Module({
@@ -14,7 +16,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       autoLoadEntities: true,
       synchronize: true
     }),
-    
+    CategoriaModule
   ],
   controllers: [],
   providers: [],
