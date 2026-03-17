@@ -1,31 +1,37 @@
 import { IsEmail, IsNotEmpty, MinLength } from "class-validator"
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm"
 import { Transform, TransformFnParams } from "class-transformer"
+import { ApiProperty } from "@nestjs/swagger"
 
 @Entity({name: "tb_usuarios"})
 export class Usuario {
 
-    @PrimaryGeneratedColumn() 
+    @PrimaryGeneratedColumn()
+    @ApiProperty() 
     id: number
 
     @Transform(({value } : TransformFnParams) => value?.trim()) // remover espaços em branco do inicio e fim
     @IsNotEmpty()
     @Column({length: 255, nullable: false}) 
+    @ApiProperty()
     nome: string
 
     @Transform(({value } : TransformFnParams) => value?.trim()) // remover espaços em branco do inicio e fim
     @IsEmail()
     @IsNotEmpty()
     @Column({length: 255, nullable: false })
+    @ApiProperty()
     usuario: string
 
     @Transform(({value } : TransformFnParams) => value?.trim()) // remover espaços em branco do inicio e fim
     @MinLength(8)
     @IsNotEmpty()
-    @Column({length: 255, nullable: false }) 
+    @Column({length: 255, nullable: false })
+    @ApiProperty() 
     senha: string
 
-    @Column({length: 5000 }) 
+    @Column({length: 5000 })
+    @ApiProperty() 
     foto: string
 
 
