@@ -50,6 +50,11 @@ export class CategoriaService {
     }
 
     async create(categoria: Categoria): Promise<Categoria> {
+        
+
+        if (await this.categoriaRepository.findOne({ where: { nome: categoria.nome } }))
+            throw new HttpException("A categoria já existe!", HttpStatus.BAD_REQUEST);
+
         return await this.categoriaRepository.save(categoria);
     }
 
